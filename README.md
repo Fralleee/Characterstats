@@ -1,2 +1,2 @@
-# characterstats
-Stats system
+# Characterstats
+Stats system in C#
