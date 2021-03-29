@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace CharacterStats
+namespace Fralle.CharacterStats
 {
 	[Serializable]
 	public abstract class CharacterStat

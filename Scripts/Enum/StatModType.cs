@@ -1,4 +1,4 @@
-﻿namespace CharacterStats
+﻿namespace Fralle.CharacterStats
 {
 	public enum StatModType
 	{

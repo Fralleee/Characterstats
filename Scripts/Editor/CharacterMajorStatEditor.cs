@@ -2,7 +2,7 @@
 using UnityEditor;
 using UnityEngine;
 
-namespace CharacterStats
+namespace Fralle.CharacterStats
 {
 	[CustomPropertyDrawer(typeof(CharacterMajorStat))]
 	public class CharacterMajorStatEditor : PropertyDrawer

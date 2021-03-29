@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace CharacterStats
+namespace Fralle.CharacterStats
 {
 	public class DebugStatInfo : MonoBehaviour
 	{

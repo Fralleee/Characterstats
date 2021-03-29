@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace CharacterStats
+namespace Fralle.CharacterStats
 {
 	[Serializable]
 	public class CharacterMinorStat : CharacterStat

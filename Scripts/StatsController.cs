@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace CharacterStats
+namespace Fralle.CharacterStats
 {
 	public class StatsController : MonoBehaviour
 	{

@@ -1,6 +1,6 @@
 using System;
 
-namespace CharacterStats
+namespace Fralle.CharacterStats
 {
 	[Serializable]
 	public class CharacterMajorStat : CharacterStat
