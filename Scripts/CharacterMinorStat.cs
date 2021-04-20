@@ -6,7 +6,7 @@ namespace Fralle.CharacterStats
 	[Serializable]
 	public class CharacterMinorStat : CharacterStat
 	{
-		public StatAttribute parentAttribute;
+		public StatAttribute ParentAttribute;
 
 		StatModifier parentStatModifier;
 		CharacterStat parentStat;
@@ -21,7 +21,7 @@ namespace Fralle.CharacterStats
 
 		void ParentStat_OnChanged(CharacterStat obj)
 		{
-			isDirty = true;
+			IsDirty = true;
 			parentStatModifier = new StatModifier(parentStat.Value * parentStatFactor, StatModType.Flat);
 			OnChangedDispatcher();
 		}

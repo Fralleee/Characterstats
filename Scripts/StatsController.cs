@@ -6,60 +6,58 @@ namespace Fralle.CharacterStats
 	public class StatsController : MonoBehaviour
 	{
 		[HideInInspector]
-		public Dictionary<StatAttribute, CharacterStat> stats;
+		public Dictionary<StatAttribute, CharacterStat> Stats;
 
 		[Header("Major stats")]
-		public CharacterMajorStat agility;
-		public CharacterMajorStat dexterity;
-		public CharacterMajorStat strength;
+		public CharacterMajorStat Agility;
+		public CharacterMajorStat Dexterity;
+		public CharacterMajorStat Strength;
 
 		[Header("Minor stats")]
-		public CharacterMinorStat aim;
-		public CharacterMinorStat jumpPower;
-		public CharacterMinorStat reloadSpeed;
-		public CharacterMinorStat runSpeed;
+		public CharacterMinorStat Aim;
+		public CharacterMinorStat JumpPower;
+		public CharacterMinorStat ReloadSpeed;
+		public CharacterMinorStat RunSpeed;
 
 		void OnEnable()
 		{
-			stats = new Dictionary<StatAttribute, CharacterStat>();
+			Stats = new Dictionary<StatAttribute, CharacterStat>();
 
-			AddMajorStatToDict(StatAttribute.DEXTERITY, dexterity);
-			AddMajorStatToDict(StatAttribute.AGILITY, agility);
-			AddMajorStatToDict(StatAttribute.STRENGTH, strength);
+			AddMajorStatToDict(StatAttribute.Dexterity, Dexterity);
+			AddMajorStatToDict(StatAttribute.Agility, Agility);
+			AddMajorStatToDict(StatAttribute.Strength, Strength);
 
-			AddMinorStatToDict(StatAttribute.AIM, aim);
-			AddMinorStatToDict(StatAttribute.JUMPPOWER, jumpPower);
-			AddMinorStatToDict(StatAttribute.RELOADSPEED, reloadSpeed);
-			AddMinorStatToDict(StatAttribute.RUNSPEED, runSpeed);
+			AddMinorStatToDict(StatAttribute.Aim, Aim);
+			AddMinorStatToDict(StatAttribute.Jumppower, JumpPower);
+			AddMinorStatToDict(StatAttribute.Reloadspeed, ReloadSpeed);
+			AddMinorStatToDict(StatAttribute.Runspeed, RunSpeed);
 		}
 
 		public void ModifyStat(StatAttribute statAttribute, float value, StatModType statModType)
 		{
-			stats[statAttribute].AddModifier(new StatModifier(value, statModType));
+			Stats[statAttribute].AddModifier(new StatModifier(value, statModType));
 		}
 
 		public void ClearModifiers(StatAttribute statAttribute, object source)
 		{
-			stats[statAttribute].RemoveAllModifiersFromSource(source);
+			Stats[statAttribute].RemoveAllModifiersFromSource(source);
 		}
 
 		void AddMajorStatToDict(StatAttribute attribute, CharacterMajorStat stat)
 		{
-			stats.Add(attribute, stat);
+			Stats.Add(attribute, stat);
 		}
 
 		void AddMinorStatToDict(StatAttribute attribute, CharacterMinorStat stat)
 		{
-			var parent = stats[stat.parentAttribute];
+			var parent = Stats[stat.ParentAttribute];
 			stat.SetupParentListener(parent);
-			stats.Add(attribute, stat);
+			Stats.Add(attribute, stat);
 		}
 
 		public CharacterStat GetStat(StatAttribute attribute)
 		{
-			if (stats.TryGetValue(attribute, out CharacterStat value))
-				return value;
-			return null;
+			return Stats.TryGetValue(attribute, out CharacterStat value) ? value : null;
 		}
 
 	}

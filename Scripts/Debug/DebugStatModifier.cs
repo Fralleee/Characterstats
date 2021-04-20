@@ -5,7 +5,7 @@ namespace Fralle.CharacterStats
 {
 	public class DebugStatModifier : MonoBehaviour
 	{
-		public StatAttribute attribute;
+		public StatAttribute Attribute;
 
 		public Button decreasePercentage;
 		public Button decreaseFlat;
@@ -26,22 +26,22 @@ namespace Fralle.CharacterStats
 
 		void DecreasePercentage()
 		{
-			statsController.ModifyStat(attribute, -0.05f, StatModType.PercentAdd);
+			statsController.ModifyStat(Attribute, -0.05f, StatModType.PercentAdd);
 		}
 
 		void DecreaseFlat()
 		{
-			statsController.ModifyStat(attribute, -1, StatModType.Flat);
+			statsController.ModifyStat(Attribute, -1, StatModType.Flat);
 		}
 
 		void IncreaseFlat()
 		{
-			statsController.ModifyStat(attribute, 1, StatModType.Flat);
+			statsController.ModifyStat(Attribute, 1, StatModType.Flat);
 		}
 
 		void IncreasePercentage()
 		{
-			statsController.ModifyStat(attribute, 0.05f, StatModType.PercentAdd);
+			statsController.ModifyStat(Attribute, 0.05f, StatModType.PercentAdd);
 		}
 
 

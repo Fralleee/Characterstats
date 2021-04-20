@@ -1,6 +1,7 @@
 using Fralle.Core.Attributes;
 using System;
 using System.Collections.Generic;
+using Fralle.Core.Extensions;
 using UnityEngine;
 
 namespace Fralle.CharacterStats
@@ -12,8 +13,8 @@ namespace Fralle.CharacterStats
 
 		public float BaseValue;
 
-		protected bool isDirty = true;
-		protected float lastBaseValue;
+		protected bool IsDirty = true;
+		protected float LastBaseValue;
 
 		[SerializeField, Readonly]
 		protected float _value;
@@ -21,21 +22,19 @@ namespace Fralle.CharacterStats
 		{
 			get
 			{
-				if (isDirty || lastBaseValue != BaseValue)
-				{
-					lastBaseValue = BaseValue;
-					_value = CalculateFinalValue();
-					isDirty = false;
-				}
+				if (!IsDirty && LastBaseValue.EqualsWithTolerance(BaseValue)) return _value;
+				LastBaseValue = BaseValue;
+				_value = CalculateFinalValue();
+				IsDirty = false;
 				return _value;
 			}
 		}
 
-		protected readonly List<StatModifier> statModifiers;
+		protected readonly List<StatModifier> StatModifiers;
 
 		protected CharacterStat()
 		{
-			statModifiers = new List<StatModifier>();
+			StatModifiers = new List<StatModifier>();
 		}
 
 		protected CharacterStat(float baseValue) : this()
@@ -50,16 +49,16 @@ namespace Fralle.CharacterStats
 
 		public virtual void AddModifier(StatModifier mod)
 		{
-			isDirty = true;
-			statModifiers.Add(mod);
+			IsDirty = true;
+			StatModifiers.Add(mod);
 			OnChangedDispatcher();
 		}
 
 		public virtual bool RemoveModifier(StatModifier mod)
 		{
-			if (statModifiers.Remove(mod))
+			if (StatModifiers.Remove(mod))
 			{
-				isDirty = true;
+				IsDirty = true;
 				OnChangedDispatcher();
 				return true;
 			}
@@ -68,23 +67,22 @@ namespace Fralle.CharacterStats
 
 		public virtual bool RemoveAllModifiersFromSource(object source)
 		{
-			int numRemovals = statModifiers.RemoveAll(mod => mod.Source == source);
+			int numRemovals = StatModifiers.RemoveAll(mod => mod.Source == source);
 
-			if (numRemovals > 0)
-			{
-				isDirty = true;
-				OnChangedDispatcher();
-				return true;
-			}
-			return false;
+			if (numRemovals <= 0) return false;
+
+			IsDirty = true;
+			OnChangedDispatcher();
+			return true;
 		}
 
 		protected virtual int CompareModifierOrder(StatModifier a, StatModifier b)
 		{
 			if (a.Order < b.Order)
 				return -1;
-			else if (a.Order > b.Order)
+			if (a.Order > b.Order)
 				return 1;
+
 			return 0;
 		}
 
@@ -93,29 +91,31 @@ namespace Fralle.CharacterStats
 			float modifierValue = baseValue;
 			float sumPercentAdd = 0;
 
-			statModifiers.Sort(CompareModifierOrder);
+			StatModifiers.Sort(CompareModifierOrder);
 
-			for (int i = 0; i < statModifiers.Count; i++)
+			for (int i = 0; i < StatModifiers.Count; i++)
 			{
-				StatModifier mod = statModifiers[i];
+				StatModifier mod = StatModifiers[i];
 
-				if (mod.Type == StatModType.Flat)
+				switch (mod.Type)
 				{
-					modifierValue += mod.Value;
-				}
-				else if (mod.Type == StatModType.PercentAdd)
-				{
-					sumPercentAdd += mod.Value;
-
-					if (i + 1 >= statModifiers.Count || statModifiers[i + 1].Type != StatModType.PercentAdd)
+					case StatModType.Flat:
+						modifierValue += mod.Value;
+						break;
+					case StatModType.PercentAdd:
 					{
+						sumPercentAdd += mod.Value;
+
+						if (i + 1 < StatModifiers.Count && StatModifiers[i + 1].Type == StatModType.PercentAdd) continue;
 						modifierValue *= 1 + sumPercentAdd;
 						sumPercentAdd = 0;
+						break;
 					}
-				}
-				else if (mod.Type == StatModType.PercentMult)
-				{
-					modifierValue *= 1 + mod.Value;
+					case StatModType.PercentMult:
+						modifierValue *= 1 + mod.Value;
+						break;
+					default:
+						throw new ArgumentOutOfRangeException();
 				}
 			}
 

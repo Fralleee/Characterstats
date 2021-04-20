@@ -2,13 +2,13 @@
 {
 	public enum StatAttribute
 	{
-		NONE,
-		AGILITY,
-		DEXTERITY,
-		STRENGTH,
-		RELOADSPEED,
-		RUNSPEED,
-		AIM,
-		JUMPPOWER
+		None,
+		Agility,
+		Dexterity,
+		Strength,
+		Reloadspeed,
+		Runspeed,
+		Aim,
+		Jumppower
 	}
 }

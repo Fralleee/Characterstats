@@ -5,25 +5,23 @@ namespace Fralle.CharacterStats
 {
 	public class DebugStatInfo : MonoBehaviour
 	{
-		public StatAttribute attribute;
-		public Text valueText;
+		public StatAttribute Attribute;
+		public Text Text;
 
 		CharacterStat characterStat;
 
 		void Start()
 		{
 			var statsController = GetComponentInParent<StatsController>();
-			characterStat = statsController.GetStat(attribute);
-			if (characterStat != null)
-			{
-				characterStat.OnChanged += StatChanged;
-				StatChanged(characterStat);
-			}
+			characterStat = statsController.GetStat(Attribute);
+			if (characterStat == null) return;
+			characterStat.OnChanged += StatChanged;
+			StatChanged(characterStat);
 		}
 
 		private void StatChanged(CharacterStat obj)
 		{
-			valueText.text = obj.Value.ToString();
+			Text.text = obj.Value.ToString();
 		}
 
 		private void OnDestroy()
