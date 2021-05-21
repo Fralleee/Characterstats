@@ -50,7 +50,7 @@ namespace Fralle.CharacterStats
 
 		void AddMinorStatToDict(StatAttribute attribute, CharacterMinorStat stat)
 		{
-			var parent = Stats[stat.ParentAttribute];
+			CharacterStat parent = Stats[stat.ParentAttribute];
 			stat.SetupParentListener(parent);
 			Stats.Add(attribute, stat);
 		}

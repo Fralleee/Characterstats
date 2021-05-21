@@ -13,10 +13,10 @@ namespace Fralle.CharacterStats
 
 			position = EditorGUI.PrefixLabel(position, GUIUtility.GetControlID(FocusType.Passive), label);
 
-			var indent = EditorGUI.indentLevel;
+			int indent = EditorGUI.indentLevel;
 			EditorGUI.indentLevel = 0;
 
-			var baseValueRect = new Rect(position.x, position.y, position.width, 18);
+			Rect baseValueRect = new Rect(position.x, position.y, position.width, 18);
 
 			EditorGUI.PropertyField(baseValueRect, property.FindPropertyRelative("BaseValue"), GUIContent.none);
 			EditorGUI.indentLevel = indent;
