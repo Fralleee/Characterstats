@@ -14,7 +14,8 @@ namespace Fralle.CharacterStats
 		{
 			var statsController = GetComponentInParent<StatsController>();
 			characterStat = statsController.GetStat(Attribute);
-			if (characterStat == null) return;
+			if (characterStat == null)
+				return;
 			characterStat.OnChanged += StatChanged;
 			StatChanged(characterStat);
 		}

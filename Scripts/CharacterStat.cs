@@ -1,7 +1,7 @@
 using Fralle.Core.Attributes;
+using Fralle.Core.Extensions;
 using System;
 using System.Collections.Generic;
-using Fralle.Core.Extensions;
 using UnityEngine;
 
 namespace Fralle.CharacterStats
@@ -22,7 +22,8 @@ namespace Fralle.CharacterStats
 		{
 			get
 			{
-				if (!IsDirty && LastBaseValue.EqualsWithTolerance(BaseValue)) return _value;
+				if (!IsDirty && LastBaseValue.EqualsWithTolerance(BaseValue))
+					return _value;
 				LastBaseValue = BaseValue;
 				_value = CalculateFinalValue();
 				IsDirty = false;
@@ -69,7 +70,8 @@ namespace Fralle.CharacterStats
 		{
 			int numRemovals = StatModifiers.RemoveAll(mod => mod.Source == source);
 
-			if (numRemovals <= 0) return false;
+			if (numRemovals <= 0)
+				return false;
 
 			IsDirty = true;
 			OnChangedDispatcher();
@@ -106,7 +108,8 @@ namespace Fralle.CharacterStats
 					{
 						sumPercentAdd += mod.Value;
 
-						if (i + 1 < StatModifiers.Count && StatModifiers[i + 1].Type == StatModType.PercentAdd) continue;
+						if (i + 1 < StatModifiers.Count && StatModifiers[i + 1].Type == StatModType.PercentAdd)
+							continue;
 						modifierValue *= 1 + sumPercentAdd;
 						sumPercentAdd = 0;
 						break;
