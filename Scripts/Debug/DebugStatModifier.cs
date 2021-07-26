@@ -12,11 +12,11 @@ namespace Fralle.CharacterStats
 		public Button increaseFlat;
 		public Button increasePercentage;
 
-		StatsController statsController;
+		StatsControllerBase statsController;
 
 		void Awake()
 		{
-			statsController = GetComponentInParent<StatsController>();
+			statsController = GetComponentInParent<StatsControllerBase>();
 
 			decreasePercentage.onClick.AddListener(DecreasePercentage);
 			decreaseFlat.onClick.AddListener(DecreaseFlat);

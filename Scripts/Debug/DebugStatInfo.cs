@@ -12,7 +12,7 @@ namespace Fralle.CharacterStats
 
 		void Start()
 		{
-			StatsController statsController = GetComponentInParent<StatsController>();
+			StatsControllerBase statsController = GetComponentInParent<StatsControllerBase>();
 			characterStat = statsController.GetStat(Attribute);
 			if (characterStat == null)
 				return;
