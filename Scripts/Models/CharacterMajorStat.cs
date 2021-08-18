@@ -2,8 +2,8 @@ using System;
 
 namespace Fralle.CharacterStats
 {
-	[Serializable]
-	public class CharacterMajorStat : CharacterStat
-	{
-	}
+  [Serializable]
+  public class CharacterMajorStat : CharacterStat
+  {
+  }
 }

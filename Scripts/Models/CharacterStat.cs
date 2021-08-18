@@ -1,5 +1,4 @@
 using Fralle.Core;
-using Fralle.Core.Extensions;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -105,15 +104,15 @@ namespace Fralle.CharacterStats
             modifierValue += mod.Value;
             break;
           case StatModType.PercentAdd:
-            {
-              sumPercentAdd += mod.Value;
+          {
+            sumPercentAdd += mod.Value;
 
-              if (i + 1 < StatModifiers.Count && StatModifiers[i + 1].Type == StatModType.PercentAdd)
-                continue;
-              modifierValue *= 1 + sumPercentAdd;
-              sumPercentAdd = 0;
-              break;
-            }
+            if (i + 1 < StatModifiers.Count && StatModifiers[i + 1].Type == StatModType.PercentAdd)
+              continue;
+            modifierValue *= 1 + sumPercentAdd;
+            sumPercentAdd = 0;
+            break;
+          }
           case StatModType.PercentMult:
             modifierValue *= 1 + mod.Value;
             break;
