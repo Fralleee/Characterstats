@@ -5,7 +5,6 @@ namespace Fralle.CharacterStats
 {
   public class StatsControllerBase : MonoBehaviour
   {
-    [HideInInspector]
     public Dictionary<StatAttribute, CharacterStat> Stats;
 
     public CharacterStat GetStat(StatAttribute attribute)
@@ -18,6 +17,7 @@ namespace Fralle.CharacterStats
       Stats[statAttribute].AddModifier(new StatModifier(value, statModType));
     }
 
+    // ReSharper disable once UnusedMember.Global
     public void ClearModifiers(StatAttribute statAttribute, object source)
     {
       Stats[statAttribute].RemoveAllModifiersFromSource(source);
@@ -30,7 +30,7 @@ namespace Fralle.CharacterStats
 
     protected void AddMinorStatToDict(StatAttribute attribute, CharacterMinorStat stat)
     {
-      CharacterStat parent = Stats[stat.ParentAttribute];
+      CharacterStat parent = Stats[stat.parentAttribute];
       stat.SetupParentListener(parent);
       Stats.Add(attribute, stat);
     }

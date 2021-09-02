@@ -17,8 +17,10 @@ namespace Fralle.CharacterStats
 
     public StatModifier(float value, StatModType type) : this(value, type, (int)type, null) { }
 
+    // ReSharper disable once UnusedMember.Global
     public StatModifier(float value, StatModType type, int order) : this(value, type, order, null) { }
 
+    // ReSharper disable once UnusedMember.Global
     public StatModifier(float value, StatModType type, object source) : this(value, type, (int)type, source) { }
   }
 }

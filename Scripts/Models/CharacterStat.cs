@@ -57,13 +57,12 @@ namespace Fralle.CharacterStats
 
     public virtual bool RemoveModifier(StatModifier mod)
     {
-      if (StatModifiers.Remove(mod))
-      {
-        IsDirty = true;
-        OnChangedDispatcher();
-        return true;
-      }
-      return false;
+      if (!StatModifiers.Remove(mod))
+        return false;
+
+      IsDirty = true;
+      OnChangedDispatcher();
+      return true;
     }
 
     public virtual bool RemoveAllModifiersFromSource(object source)
@@ -80,12 +79,7 @@ namespace Fralle.CharacterStats
 
     protected virtual int CompareModifierOrder(StatModifier a, StatModifier b)
     {
-      if (a.Order < b.Order)
-        return -1;
-      if (a.Order > b.Order)
-        return 1;
-
-      return 0;
+      return a.Order < b.Order ? -1 : a.Order > b.Order ? 1 : 0;
     }
 
     protected virtual float CalculateModifiers(float baseValue)

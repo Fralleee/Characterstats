@@ -6,7 +6,7 @@ namespace Fralle.CharacterStats
   [Serializable]
   public class CharacterMinorStat : CharacterStat
   {
-    public StatAttribute ParentAttribute;
+    public StatAttribute parentAttribute;
 
     StatModifier parentStatModifier;
     CharacterStat parentStat;
