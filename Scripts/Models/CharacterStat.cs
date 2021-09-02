@@ -1,4 +1,5 @@
 using Fralle.Core;
+using Sirenix.OdinInspector;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,23 +11,23 @@ namespace Fralle.CharacterStats
   {
     public event Action<CharacterStat> OnChanged = delegate { };
 
-    public float BaseValue;
+    public float baseValue;
 
     protected bool IsDirty = true;
     protected float LastBaseValue;
 
-    [SerializeField, Readonly]
-    protected float _value;
+    [SerializeField, ReadOnly]
+    protected float value;
     public float Value
     {
       get
       {
-        if (!IsDirty && LastBaseValue.EqualsWithTolerance(BaseValue))
-          return _value;
-        LastBaseValue = BaseValue;
-        _value = CalculateFinalValue();
+        if (!IsDirty && LastBaseValue.EqualsWithTolerance(baseValue))
+          return value;
+        LastBaseValue = baseValue;
+        value = CalculateFinalValue();
         IsDirty = false;
-        return _value;
+        return value;
       }
     }
 
@@ -39,7 +40,7 @@ namespace Fralle.CharacterStats
 
     protected CharacterStat(float baseValue) : this()
     {
-      BaseValue = baseValue;
+      this.baseValue = baseValue;
     }
 
     protected virtual void OnChangedDispatcher()
@@ -125,6 +126,6 @@ namespace Fralle.CharacterStats
       return (float)Math.Round(modifierValue, 4);
     }
 
-    protected virtual float CalculateFinalValue() => (float)Math.Round(CalculateModifiers(BaseValue), 4);
+    protected virtual float CalculateFinalValue() => (float)Math.Round(CalculateModifiers(baseValue), 4);
   }
 }
