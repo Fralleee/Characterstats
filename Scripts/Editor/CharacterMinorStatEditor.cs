@@ -24,10 +24,10 @@ namespace Fralle.CharacterStats
       Rect baseValueRect = new Rect(position.x, position.y + 20, 50, 18);
       Rect actualValueRect = new Rect(position.x + 52, position.y + 20, 50, 18);
 
-      EditorGUI.PropertyField(parentAttributeRect, property.FindPropertyRelative("ParentAttribute"), GUIContent.none);
-      EditorGUI.PropertyField(parentStatFactorRect, property.FindPropertyRelative("parentStatFactor"), GUIContent.none);
-      EditorGUI.PropertyField(baseValueRect, property.FindPropertyRelative("BaseValue"), GUIContent.none);
-      EditorGUI.PropertyField(actualValueRect, property.FindPropertyRelative("_value"), GUIContent.none);
+      EditorGUI.PropertyField(parentAttributeRect, property?.FindPropertyRelative("parentAttribute"), GUIContent.none);
+      EditorGUI.PropertyField(parentStatFactorRect, property?.FindPropertyRelative("parentStatFactor"), GUIContent.none);
+      EditorGUI.PropertyField(baseValueRect, property?.FindPropertyRelative("baseValue"), GUIContent.none);
+      EditorGUI.PropertyField(actualValueRect, property?.FindPropertyRelative("value"), GUIContent.none);
 
       EditorGUI.indentLevel = indent;
 

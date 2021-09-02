@@ -18,7 +18,7 @@ namespace Fralle.CharacterStats
 
       Rect baseValueRect = new Rect(position.x, position.y, position.width, 18);
 
-      EditorGUI.PropertyField(baseValueRect, property.FindPropertyRelative("BaseValue"), GUIContent.none);
+      EditorGUI.PropertyField(baseValueRect, property?.FindPropertyRelative("baseValue"), GUIContent.none);
       EditorGUI.indentLevel = indent;
 
       EditorGUI.EndProperty();
