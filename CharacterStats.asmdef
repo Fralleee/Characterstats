@@ -2,7 +2,8 @@
     "name": "Fralle.CharacterStats",
     "rootNamespace": "Fralle.CharacterStats",
     "references": [
-        "Fralle.Core"
+        "Fralle.Core",
+        "Sirenix.OdinInspector.CompatibilityLayer"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

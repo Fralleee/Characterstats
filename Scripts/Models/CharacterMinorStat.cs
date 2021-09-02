@@ -28,7 +28,7 @@ namespace Fralle.CharacterStats
 
     protected override float CalculateFinalValue()
     {
-      float finalValue = BaseValue;
+      float finalValue = baseValue;
       finalValue += parentStatModifier.Value;
       return (float)Math.Round(CalculateModifiers(finalValue), 4);
     }
